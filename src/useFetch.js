@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import firebase from "./utilities/Firebase";
 
 const useFetch = (url)=>{
 
@@ -9,6 +10,16 @@ const useFetch = (url)=>{
     useEffect(()=>{
 
         const abortCont = new AbortController(); 
+
+        // const blogRef = firebase.database().ref("blogs")
+        // ;
+        // blogRef.on("value",(snapshot)=>{
+        //     // console.log(snapshot.val());
+        //     setData(snapshot.val()); 
+        //     setIspending(false);
+        //     setError(null);
+        // })
+        
 
         setTimeout(() => {
             fetch(url,{signal:abortCont.signal})
@@ -32,6 +43,8 @@ const useFetch = (url)=>{
                 };
             })
         }, 1000);
+
+        
 
         return ()=>abortCont.abort();
 
